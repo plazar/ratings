@@ -9,7 +9,10 @@ Patrick Lazarus, July 22, 2010
 """
 import types
 import os.path
+import subprocess
+
 import pymssql
+
 import rating
 import config
 

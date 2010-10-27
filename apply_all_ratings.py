@@ -4,6 +4,7 @@ import optparse
 
 def main():
     import rating
+#    import upload_rating
     import harmonic_rating
     import pfd_ratings
     import profile_ratings
@@ -14,7 +15,9 @@ def main():
 
     D = rating.usual_database()
     rating.run(D,
-               [gaussian_ratings.GaussianWidth(D), 
+               [
+#                upload_rating.UploadRating(D)
+                gaussian_ratings.GaussianWidth(D), 
                 gaussian_ratings.GaussianHeight(D), 
                 gaussian_ratings.GaussianPhase(D), 
                 gaussian_ratings.GaussianSignificance(D), 
