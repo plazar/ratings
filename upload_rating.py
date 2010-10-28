@@ -83,8 +83,12 @@ def share_pfd(pfdfn):
         raise ValueError("pfdfn doesn't point to an existing file: %s" % pfdfn)
     cmd = "rsync -u pfdfn %s@miarka.physics.mcgill.ca:/data/alfa/PALFA/pfds/%s/%s" % \
                     (USERNAME, config.institution, os.path.split(pfdfn)[-1])
-    retcode = subprocess.call(cmd, shell=True)
+    pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, \
+                                stderr=subprocess.PIPE)
+    out, err = pipe.communicate()
+    retcode = pipe.returncode
     if retcode != 0:
+        sys.stderr.write(err + "\n")
         raise ShareError("Rsync of pfd file (%s) failed!" % pfdfn)
 
 
