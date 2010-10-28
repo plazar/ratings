@@ -10,6 +10,7 @@ Patrick Lazarus, July 22, 2010
 import types
 import os.path
 import subprocess
+import sys
 
 import pymssql
 
