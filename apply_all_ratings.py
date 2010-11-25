@@ -4,11 +4,11 @@ import optparse
 
 def main():
     import rating
-#    import upload_rating
-    import harmonic_rating
-    import pfd_ratings
-    import profile_ratings
-    import gaussian_ratings
+    import upload_rating
+#    import harmonic_rating
+#    import pfd_ratings
+#    import profile_ratings
+#    import gaussian_ratings
 
     if options.where is not None:
         print "Using 'where clause':", options.where 
@@ -16,16 +16,16 @@ def main():
     D = rating.usual_database()
     rating.run(D,
                [
-#                upload_rating.UploadRating(D)
-                gaussian_ratings.GaussianWidth(D), 
-                gaussian_ratings.GaussianHeight(D), 
-                gaussian_ratings.GaussianPhase(D), 
-                gaussian_ratings.GaussianSignificance(D), 
-                harmonic_rating.HarmonicRating(D), 
-                profile_ratings.DutyCycle(D), 
-                profile_ratings.PrepfoldSigmaRating(D), 
-                pfd_ratings.RatioRating(D), 
-                pfd_ratings.RatioRatingPeak(D), 
+                upload_rating.UploadRating(D)
+#                gaussian_ratings.GaussianWidth(D), 
+#                gaussian_ratings.GaussianHeight(D), 
+#                gaussian_ratings.GaussianPhase(D), 
+#                gaussian_ratings.GaussianSignificance(D), 
+#                harmonic_rating.HarmonicRating(D), 
+#                profile_ratings.DutyCycle(D), 
+#                profile_ratings.PrepfoldSigmaRating(D), 
+#                pfd_ratings.RatioRating(D), 
+#                pfd_ratings.RatioRatingPeak(D), 
                ],
               where_clause=options.where,
               scramble=options.scramble,
