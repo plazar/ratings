@@ -40,7 +40,7 @@ def extract_file(dir,candidate,f,with_bestprof):
         
 	if not os.path.exists(rfn):
 	    # Un-tarring pfd files
-	    tar_cmd = ["tar","-C",dir,"--wildcards","-x", "*.pfd"]
+	    tar_cmd = ["tar","-C",dir,"--wildcards","-x"]
             
             # PALFA tarballs don't have _pfd in the filename
             tgz_path = os.path.join(path,base+".tgz")
@@ -50,19 +50,22 @@ def extract_file(dir,candidate,f,with_bestprof):
             pfd_tar_path = os.path.join(path,base+"_pfd.tar")
             pfd_tar_gz_path = os.path.join(path,base+"_pfd.tar.gz")
             if os.path.exists(tar_path):
-                retcode = subprocess.call(tar_cmd+["-f",tar_path])
+                extra_args = ["-f",tar_path]
             elif os.path.exists(tgz_path):
-                retcode = subprocess.call(tar_cmd+["-z","-f",tgz_path])
+                extra_args = ["-z","-f",tgz_path]
             elif os.path.exists(tar_gz_path):
-                retcode = subprocess.call(tar_cmd+["-z","-f",tar_gz_path])
+                extra_args = ["-z","-f",tar_gz_path]
             elif os.path.exists(pfd_tar_path):
-                retcode = subprocess.call(tar_cmd+["-f",pfd_tar_path])
+                extra_args = ["-f",pfd_tar_path]
             elif os.path.exists(pfd_tgz_path):
-                retcode = subprocess.call(tar_cmd+["-z","-f",pfd_tgz_path])
+                extra_args = ["-z","-f",pfd_tgz_path]
             elif os.path.exists(pfd_tar_gz_path):
-                retcode = subprocess.call(tar_cmd+["-z","-f",pfd_tar_gz_path])
+               extra_args = ["-z","-f",pfd_tar_gz_path]
             else:
                 raise ValueError("Cannot find tar file")
+
+            tar_cmd = tar_cmd + extra_args + ["*.pfd"]
+            retcode = subprocess.call(tar_cmd)
             if retcode:
                 raise ValueError("tar extraction failed with return code %d" % retcode)
 
